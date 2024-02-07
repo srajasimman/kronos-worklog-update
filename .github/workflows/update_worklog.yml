@@ -17,10 +17,6 @@ jobs:
               uses: actions/setup-node@v4
               with:
                 node-version: '21.x'
-                cache: 'npm'
-
-            - name: Install Dependencies
-              run: npm install
 
             - name: Run update_worklog javascript
               run: node update_worklog.js
