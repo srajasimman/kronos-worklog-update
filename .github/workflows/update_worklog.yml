@@ -13,17 +13,20 @@ jobs:
             - name: Checkout the repo
               uses: actions/checkout@v4
 
-            - name: Setup Python
-              uses: actions/setup-python@v5
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
               with:
-                  python-version: '3.x'
+                node-version: '21.x'
+                cache: 'npm'
 
-            - name: Run update_worklog python script
-              run: |
-                  python update_worklog.py
+            - name: Install Dependencies
+              run: npm install
+
+            - name: Run update_worklog javascript
+              run: node update_worklog.js
               env:
-                  KRONOS_EMAIL: ${{ secrets.KRONOS_EMAIL }}
-                  KRONOS_PASSWORD: ${{ secrets.KRONOS_PASSWORD }}
+                KRONOS_EMAIL: ${{ secrets.KRONOS_EMAIL }}
+                KRONOS_PASSWORD: ${{ secrets.KRONOS_PASSWORD }}
 
             - name: PingMe On Pushbullet
               uses: kha7iq/pingme-action@v1
