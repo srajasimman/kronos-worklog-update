@@ -18,6 +18,9 @@ jobs:
               with:
                 node-version: '21.x'
 
+            - name: Install dependencies
+              run: npm install
+
             - name: Run update_worklog javascript
               run: node update_worklog.js
               env:
