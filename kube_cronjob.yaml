@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: kronos-update
+  namespace: default
+spec:
+  schedule: "* 13 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kronos-update
+            image: srajasimman/kronos_worklog_update:latest
+            envFrom:
+            - secretRef: kronos-secret
+          restartPolicy: OnFailure
