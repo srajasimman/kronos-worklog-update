@@ -2,38 +2,38 @@
 name: update_worklog
 
 on:
-    workflow_dispatch:
-    schedule:
-        - cron: '30 13 * * *'
+  workflow_dispatch:
+  schedule:
+    - cron: "30 13 * * *"
 jobs:
-    update_worklog:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout the repo
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
+  update_worklog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-            - name: Setup Python
-              uses: actions/setup-python@v5
-              with:
-                  python-version: '3.x'
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
 
-            - name: Run update_worklog python script
-              run: |
-                  python update_worklog.py
-              env:
-                  KRONOS_EMAIL: ${{ secrets.KRONOS_EMAIL }}
-                  KRONOS_PASSWORD: ${{ secrets.KRONOS_PASSWORD }}
+      - name: Run update_worklog python script
+        run: |
+          python update_worklog.py
+        env:
+          KRONOS_EMAIL: ${{ secrets.KRONOS_EMAIL }}
+          KRONOS_PASSWORD: ${{ secrets.KRONOS_PASSWORD }}
 
-            - name: PingMe On Pushbullet
-              uses: kha7iq/pingme-action@v1
-              with:
-                service: pushbullet
-              env:
-                PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
-                PUSHBULLET_DEVICE: ${{ secrets.PUSHBULLET_DEVICE }}
-                PUSHBULLET_TITLE: 'Kronos Worklog Updated'
-                PUSHBULLET_MESSAGE: |
-                  Event is triggered by ${{ github.event_name }}
-                  Workflow Log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: PingMe On Pushbullet
+        uses: kha7iq/pingme-action@v1
+        with:
+          service: pushbullet
+        env:
+          PUSHBULLET_TOKEN: ${{ secrets.PUSHBULLET_TOKEN }}
+          PUSHBULLET_DEVICE: ${{ secrets.PUSHBULLET_DEVICE }}
+          PUSHBULLET_TITLE: "Kronos Worklog Updated"
+          PUSHBULLET_MESSAGE: |
+            Event is triggered by ${{ github.event_name }}
+            Workflow Log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
