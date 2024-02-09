@@ -3,7 +3,8 @@ name: update_worklog
 
 on:
     workflow_dispatch:
-
+    schedule:
+        - cron: '30 13 * * *'
 jobs:
     update_worklog:
         runs-on: ubuntu-latest
