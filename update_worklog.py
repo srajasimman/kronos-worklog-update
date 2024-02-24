@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 start_date = datetime.now()
 end_date = datetime.now()
 
-kronos_domain = "https://kronos.tarento.com"
+kronos_domain = os.environ['KRONOS_DOMAIN']
 
 tasks = {
     'Deployment': 6,

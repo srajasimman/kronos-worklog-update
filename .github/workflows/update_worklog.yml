@@ -25,6 +25,7 @@ jobs:
         env:
           KRONOS_EMAIL: ${{ secrets.KRONOS_EMAIL }}
           KRONOS_PASSWORD: ${{ secrets.KRONOS_PASSWORD }}
+          KRONOS_DOMAIN: ${{ secrets.KRONOS_DOMAIN }}
 
       - name: PingMe On Pushbullet
         uses: kha7iq/pingme-action@v1
