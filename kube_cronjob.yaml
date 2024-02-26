@@ -13,5 +13,6 @@ spec:
           - name: kronos-update
             image: ghcr.io/srajasimman/kronos_worklog_update:main
             envFrom:
-            - secretRef: kronos-secret
+            - secretRef:
+                name: kronos-secret
           restartPolicy: OnFailure
