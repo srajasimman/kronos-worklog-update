@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: kronos-update
-            image: gcr.io/srajasimman/kronos_worklog_update:latest
+            image: ghcr.io/srajasimman/kronos_worklog_update:main
             envFrom:
             - secretRef: kronos-secret
           restartPolicy: OnFailure
