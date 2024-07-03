@@ -13,5 +13,5 @@
 
 ## Authors
 
-* **Rajasimman S** - *SysAdmin* - [srajasimman](https://github.com/srajasimman/)
+* **Rajasimman S** - [srajasimman](https://github.com/srajasimman/)
 
