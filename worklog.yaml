@@ -8,7 +8,7 @@ project_management:
   note_input: Project Management and Reports
   task_id: 8
 support:
-  minute: 60
+  minute: 360
   note_input: NOC Team Support
   task_id: 7
 # deployment:
