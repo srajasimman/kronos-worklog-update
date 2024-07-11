@@ -14,12 +14,9 @@ end_date = datetime.now()
 
 kronos_domain = os.environ['KRONOS_DOMAIN']
 
-tasks = {
-    'Deployment': 6,
-    'Support': 7,
-    'Project Management': 9,
-    'Meetings': 40
-}
+# Read tasks from worklog.json
+with open('worklog.json') as f:
+    tasks = json.load(f)
 
 def generate_uuid():
     return str(uuid.uuid4())
@@ -48,7 +45,7 @@ def get_authorization_token(email, password):
     authorization_token = json.loads(response_data)['responseData']['sessionId'] 
     return authorization_token
 
-def save_task_time(date, note, authorization_token, task_id, minute=480):
+def save_task_time(authorization_token, date, note, task_id, minute=60):
     url = kronos_domain + '/api/v1/user/saveTaskTimeForProject'
     headers = {
         'Authorization': authorization_token,
@@ -84,42 +81,29 @@ def save_task_time(date, note, authorization_token, task_id, minute=480):
 
     return response.status, response_data
 
+def main():
 # check if Kronos credentials are present in env
-if 'KRONOS_EMAIL' not in os.environ or 'KRONOS_PASSWORD' not in os.environ:
-    raise ValueError("KRONOS_EMAIL or KRONOS_PASSWORD not found in env")
-else:
-    authorization_token = get_authorization_token(os.environ['KRONOS_EMAIL'], os.environ['KRONOS_PASSWORD'])
-    if not authorization_token:
-        raise ValueError("authorization_token not found")
-
-current_date = start_date
-while current_date <= end_date:
-    # Check if the current date is not a Saturday or Sunday
-    if current_date.weekday() < 5:  # Monday to Friday
-        date_str = current_date.strftime("%Y-%m-%d")
-
-        note_input = "Daily Status Call and Project Meetings"
-        task_id = tasks['Meetings']
-        minute = 60 # Total minutes spent on above task
-        status_code, response_json = save_task_time(date_str, note_input, authorization_token, task_id, minute)
-        print(f"For {date_str}: Status Code: {status_code}, Response JSON: {response_json}")
+    if 'KRONOS_EMAIL' not in os.environ or 'KRONOS_PASSWORD' not in os.environ:
+        raise ValueError("KRONOS_EMAIL or KRONOS_PASSWORD not found in env")
+    else:
+        authorization_token = get_authorization_token(os.environ['KRONOS_EMAIL'], os.environ['KRONOS_PASSWORD'])
+        if not authorization_token:
+            raise ValueError("authorization_token not found")
     
-        note_input = "Project Management"
-        task_id = tasks['Project Management']
-        minute = 60 # Total minutes spent on above task
-        status_code, response_json = save_task_time(date_str, note_input, authorization_token, task_id, minute)
-        print(f"For {date_str}: Status Code: {status_code}, Response JSON: {response_json}")
+    current_date = start_date
+    while current_date <= end_date:
+        # Check if the current date is not a Saturday or Sunday
+        if current_date.weekday() < 5:  # Monday to Friday
+            date_str = current_date.strftime("%Y-%m-%d")
+    
+            for task in tasks:
+                note_input = tasks[task]['note_input']
+                task_id = tasks[task]['task_id']
+                minute = tasks[task]['minute'] # Total minutes spent on above task
+                status_code, response_json = save_task_time(authorization_token, date_str, note_input, task_id, minute)
+                print(f"For {date_str}: Status Code: {status_code}, Response JSON: {response_json}")
+    
+        current_date += timedelta(days=1)
 
-        note_input = "NOC Team Support"
-        task_id = tasks['Support']
-        minute = 360 # Total minutes spent on above task
-        status_code, response_json = save_task_time(date_str, note_input, authorization_token, task_id, minute)
-        print(f"For {date_str}: Status Code: {status_code}, Response JSON: {response_json}")
-
-        # note_input = "Production Deployment Support"
-        # task_id = tasks['Deployment']
-        # minute = 360 # Total minutes spent on above task
-        # status_code, response_json = save_task_time(date_str, note_input, authorization_token, task_id, minute)
-        # print(f"For {date_str}: Status Code: {status_code}, Response JSON: {response_json}")
-
-    current_date += timedelta(days=1)
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,22 @@
+{
+  "deployment": {
+    "minute": 60,
+    "note_input": "Deployment",
+    "task_id": 6
+  },
+  "meetings": {
+    "minute": 60,
+    "note_input": "Daily Status Call and Project Meetings",
+    "task_id": 40
+  },
+  "project_management": {
+    "minute": 60,
+    "note_input": "Project Management",
+    "task_id": 8
+  },
+  "support": {
+    "minute": 60,
+    "note_input": "Support",
+    "task_id": 7
+  }
+}
