@@ -14,6 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: YAML to JSON
+        uses: NeddM/YAML-to-JSON@v1.1
+        with:
+          input: worklog.yaml
+          output: worklog.json
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

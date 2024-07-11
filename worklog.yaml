@@ -1,0 +1,17 @@
+---
+meetings:
+  minute: 60
+  note_input: Daily Status Call and Project Meetings
+  task_id: 40
+project_management:
+  minute: 60
+  note_input: Project Management and Reports
+  task_id: 8
+support:
+  minute: 60
+  note_input: NOC Team Support
+  task_id: 7
+# deployment:
+#   minute: 60
+#   note_input: Deployment Support
+#   task_id: 6
