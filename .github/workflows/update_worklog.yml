@@ -1,5 +1,5 @@
 # Github workflow for Python script
-name: update_worklog
+name: Worklog Update
 
 on:
   workflow_dispatch:
