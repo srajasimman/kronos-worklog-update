@@ -9,7 +9,12 @@
     <br/>
     <br/>
 
-![Contributors](https://img.shields.io/github/contributors/srajasimman/kronos_worklog_update?color=dark-green) ![Forks](https://img.shields.io/github/forks/srajasimman/kronos_worklog_update?style=social) ![Stargazers](https://img.shields.io/github/stars/srajasimman/kronos_worklog_update?style=social) ![Issues](https://img.shields.io/github/issues/srajasimman/kronos_worklog_update) ![License](https://img.shields.io/github/license/srajasimman/kronos_worklog_update) 
+[![Worklog Update](https://github.com/srajasimman/kronos-worklog-update/actions/workflows/update_worklog.yml/badge.svg)](https://github.com/srajasimman/kronos-worklog-update/actions/workflows/update_worklog.yml)
+![Contributors](https://img.shields.io/github/contributors/srajasimman/kronos_worklog_update?color=dark-green)
+![Forks](https://img.shields.io/github/forks/srajasimman/kronos_worklog_update?style=social)
+![Stargazers](https://img.shields.io/github/stars/srajasimman/kronos_worklog_update?style=social)
+![Issues](https://img.shields.io/github/issues/srajasimman/kronos_worklog_update)
+![License](https://img.shields.io/github/license/srajasimman/kronos_worklog_update) 
 
 ## Authors
 
